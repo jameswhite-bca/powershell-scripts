@@ -1,0 +1,11 @@
+Goal of version 2.8 NAT builder:
+
+- to be able to deploy the NAT rules to the firewall
+
+To Acheive this:
+
+- HAVE to run firewall check before being able to deploy
+- Firewall check HAVE to accurate and block the deploy button if an IP is not free
+- Take the built config and apply it to the firewall
+
+
