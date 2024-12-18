@@ -1,2 +1,2 @@
 # powershell-scripts
-A collection of personal PowerShell Scripts
+personal collection of PowerShell Scripts
