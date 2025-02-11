@@ -6,26 +6,20 @@ param (
     [string]$personalAccessToken # Personal Access Token (to be provided at runtime)
 )
 
-# Calculate the date 30 days ago
-$startDate = (Get-Date).AddDays(-30).ToString("o")
-
 # Encode PAT for HTTP header
 $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$personalAccessToken"))
+$headers = @{ Authorization = "Basic $base64AuthInfo" }
 
+# Define the API endpoint for the agent pool jobs (org-level)
+$apiUrl = "https://dev.azure.com/$organisation/_apis/distributedtask/pools/$agentPoolId/jobrequests?api-version=6.0"
+#https://dev.azure.com/bcagroup/_apis/distributedtask/pools/161/jobrequests?api-version=6.0
 # Initialise an empty array to store jobs
 $jobs = @()
 
-# Define the API endpoint for the agent pool jobs (org-level)
-$apiUrl = "https://dev.azure.com/$organisation/_apis/distributedtask/pools/$agentPoolId/jobrequests?api-version=7.0-preview.1"
-
 # Pagination variables
-$hasMorePages = $true
 $continuationToken = $null
 
-while ($hasMorePages) {
-    # Set up headers with the PAT
-    $headers = @{ Authorization = "Basic $base64AuthInfo" }
-
+do {
     # Add continuation token to the API request if present
     $url = $apiUrl
     if ($null -ne $continuationToken) {
@@ -37,8 +31,8 @@ while ($hasMorePages) {
 
     # Check if the response has jobs
     if ($response -and $response.value) {
-        # Filter jobs within the past 30 days and add them to the array
-        $jobs += $response.value | Where-Object { $_.queueTime -ge $startDate }
+        # Add jobs to the array
+        $jobs += $response.value
     }
 
     # Check for a continuation token to determine if there are more pages
@@ -48,23 +42,19 @@ while ($hasMorePages) {
         $null
     }
     $hasMorePages = $null -ne $continuationToken
-}
+} while ($hasMorePages)
 
 # Extract additional details: pipeline name and project
 $jobsExport = $jobs | ForEach-Object {
     [PSCustomObject]@{
         queueTime = $_.queueTime
         finishTime = $_.finishTime
-        requestId = $_.requestId
-        owner = $_.owner
-        scope = $_.scope
-        planType = $_.planType
-        pipelineName = $_.definition.name   # Pipeline name
-        project = $_.project.name          # Project name
+        pipelineName = $_.definition.name
+        project = $_.definition.project.name
     }
 }
 
-# Export the job data to CSV
-$jobsExport | Select-Object queueTime, finishTime, requestId, owner, scope, planType, pipelineName, project | Export-Csv -Path $outputCsv -NoTypeInformation
+# Export to CSV
+$jobsExport | Export-Csv -Path $outputCsv -NoTypeInformation
 
-Write-Host "Export complete. Jobs saved to $outputCsv."
+Write-Output "Export complete. Jobs saved to $outputCsv."
