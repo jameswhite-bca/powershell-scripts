@@ -14,6 +14,9 @@ This repository is a personal collection of PowerShell scripts organized into va
 
 - **AzureDevOps/**
   - `Get-AgentPoolInfo.ps1`: Script to get information about Azure DevOps agent pools.
+  - `Get-AzureDevOpsProjectUsers.ps1`: Script to retrieve all users from a specified Azure DevOps project and export their email addresses to a CSV file.
+  - `Remove-AgentQueue.ps1`: Removes an agent pool queue from a specific Azure DevOps project.
+  - `Get-AzureDevOpsProjectUsers.ps1`: Removes a specified agent pool queue (by name) from all projects in an Azure DevOps organization.
 
 - **Backup/Asigra/**: Directory for Asigra backup scripts.
 
@@ -46,7 +49,7 @@ This repository is a personal collection of PowerShell scripts organized into va
 - **vCloud/**: Directory for vCloud-related scripts.
   - `EdgeGateway Service V2 Firewall Additions v2.ps1`: Script for adding firewall rules to EdgeGateway Service V2.
 
-- **Veeam/**
+- **Veeam**
   - `New-PECVeeamBackupRepo.ps1`: Script to configure a new Veeam Backup Repository.
 
 - **Zerto/**: Directory for Zerto-related scripts.
