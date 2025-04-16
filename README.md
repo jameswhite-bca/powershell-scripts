@@ -20,6 +20,9 @@ This repository is a personal collection of PowerShell scripts organized into va
 
 - **Backup/Asigra/**: Directory for Asigra backup scripts.
 
+- **Entra ID/**
+  - `Create-FederatedCredential.ps1`: Script to create a federated credential for an Azure AD application with embedded JSON structure.
+
 - **install-software/**
   - `Install-Agents.ps1`: Script to install agents.
   - `install-software.ps1`: Script to install various software packages.
