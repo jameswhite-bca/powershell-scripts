@@ -1,66 +1,103 @@
-# PowerShell Scripts
+# 🚀 PowerShell Scripts Repository
 
-This repository is a personal collection of PowerShell scripts organized into various directories based on their functionality and usage.
+A comprehensive collection of PowerShell scripts organized by functionality and usage. This repository contains various automation scripts for different platforms and services.
 
-## Directory Structure
+## 📁 Directory Structure
 
-- **Active Directory/**
-  - `Export Users.ps1`: Script to export users from Active Directory.
+### 🔐 Active Directory
+- **Export Users.ps1** - Exports user information from Active Directory to a CSV file.
 
-- **ASAv/**
-  - `Deploy NAT Rules.PS1`: Script to deploy NAT rules.
-  - `Install ASAv.ps1`: Script to install ASAv.
-  - `NAT_Builder_V2.8/`: Directory containing NAT Builder version 2.8 scripts and documentation.
+### 🛡️ ASAv
+- **Deploy NAT Rules.PS1** - Deploys NAT rules to Cisco ASAv firewall.
+- **Install ASAv.ps1** - Automated installation script for Cisco ASAv.
+- **NAT_Builder_V2.8/** - Complete NAT rule management solution with documentation.
 
-- **AzureDevOps/**
-  - `Get-AgentPoolInfo.ps1`: Script to get information about Azure DevOps agent pools.
-  - `Get-AzureDevOpsProjectUsers.ps1`: Script to retrieve all users from a specified Azure DevOps project and export their email addresses to a CSV file.
-  - `Remove-AgentQueue.ps1`: Removes an agent pool queue from a specific Azure DevOps project.
-  - `Get-AzureDevOpsProjectUsers.ps1`: Removes a specified agent pool queue (by name) from all projects in an Azure DevOps organization.
+### 🔄 Azure DevOps
+- **Get-AgentPoolInfo.ps1** - Retrieves detailed information about Azure DevOps agent pools.
+- **Get-AzureDevOpsProjectUsers.ps1** - Exports all users from a specified Azure DevOps project to CSV.
+- **Remove-AgentQueue.ps1** - Removes agent pool queues from Azure DevOps projects.
+- **AddOrUpdate-AzDoUser.ps1** - Adds or updates users in Azure DevOps with specified licenses.
 
-- **Backup/Asigra/**: Directory for Asigra backup scripts.
+### 💾 Backup/Asigra
+- Contains scripts for managing Asigra backup solutions.
 
-- **Entra ID/**
-  - `Create-FederatedCredential.ps1`: Script to create a federated credential for an Azure AD application with embedded JSON structure.
+### 🔑 Entra ID
+- **Create-FederatedCredential.ps1** - Creates federated credentials for Azure AD applications.
 
-- **install-software/**
-  - `Install-Agents.ps1`: Script to install agents.
-  - `install-software.ps1`: Script to install various software packages.
-  - `packages.config`: Configuration file listing software packages to be installed.
+### 📦 Install Software
+- **Install-Agents.ps1** - Automated installation of various agents.
+- **install-software.ps1** - Software package installation automation.
+- **packages.config** - Configuration file for software packages.
 
-- **M365/**
-  - `EnableMFA.ps1`: Script to enable Multi-Factor Authentication (MFA).
-  - `Get-MFAStatus.ps1`: Script to get MFA status.
-  - `GetMFAStatusReport.ps1`: Script to generate MFA status report.
-  - `MFAstatus.ps1`: Script related to MFA status.
-  - `MFAstatus2.ps1`: Another script related to MFA status.
-  - `O365UserLicenseReport.ps1`: Script to generate Office 365 user license report.
+### 🏢 M365
+- **EnableMFA.ps1** - Enables Multi-Factor Authentication for users.
+- **Get-MFAStatus.ps1** - Retrieves MFA status for users.
+- **GetMFAStatusReport.ps1** - Generates comprehensive MFA status reports.
+- **MFAstatus.ps1** - MFA status management tool.
+- **MFAstatus2.ps1** - Enhanced MFA status management.
+- **O365UserLicenseReport.ps1** - Generates Office 365 user license reports.
 
-- **MISC/**
-  - `CheckServersDNS.ps1`: Script to check DNS settings on servers.
-  - `Resource-Allocator.ps1`: Script for resource allocation.
-  - `Send-MailInfosec.ps1`: Script to send infosec-related emails.
-  - `Send-MailUltima.ps1`: Script to send emails related to new VMs.
+### 🛠️ MISC
+- **CheckServersDNS.ps1** - DNS configuration verification tool.
+- **Resource-Allocator.ps1** - Resource allocation management.
+- **Send-MailInfosec.ps1** - Automated infosec email notifications.
+- **Send-MailUltima.ps1** - New VM notification system.
 
-- **OS/**: Directory for operating system-related scripts.
+### 💻 OS
+- Operating system management and configuration scripts.
 
-- **Script Templates/**: Directory containing script templates.
+### 📝 Script Templates
+- Template scripts for various automation tasks.
 
-- **vCenter/**
-  - `New-VCSA.ps1`: Script to create a new vCenter Server Appliance (VCSA).
+### 🖥️ vCenter
+- **New-VCSA.ps1** - vCenter Server Appliance deployment automation.
 
-- **vCloud/**: Directory for vCloud-related scripts.
-  - `EdgeGateway Service V2 Firewall Additions v2.ps1`: Script for adding firewall rules to EdgeGateway Service V2.
+### ☁️ vCloud
+- **EdgeGateway Service V2 Firewall Additions v2.ps1** - EdgeGateway firewall rule management.
 
-- **Veeam**
-  - `New-PECVeeamBackupRepo.ps1`: Script to configure a new Veeam Backup Repository.
+### 💽 Veeam
+- **New-PECVeeamBackupRepo.ps1** - Veeam backup repository configuration.
 
-- **Zerto/**: Directory for Zerto-related scripts.
+### 🔄 Zerto
+- Zerto disaster recovery management scripts.
 
-## Usage
+## 🚀 Usage
 
-Each script is designed to perform specific tasks. Please refer to the comments and documentation within each script for detailed usage instructions.
+Each script is designed for specific automation tasks. Detailed usage instructions are available in the comments of each script.
 
-## License
+### 🔑 Prerequisites
+- PowerShell 7.0 or later
+- Required modules (specified in each script)
+- Appropriate permissions for the target systems
 
-This repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+### 📋 Example Usage
+
+```powershell
+# Azure DevOps User Management
+.\AzureDevOps\AddOrUpdate-AzDoUser.ps1 -Organization "your-org" -UserEmail "user@example.com" -AccessLevel "basic" -PAT "your-pat"
+
+# MFA Management
+.\M365\EnableMFA.ps1 -UserPrincipalName "user@domain.com"
+```
+
+## 🔒 Security Notes
+
+- Always store sensitive information (like PAT tokens) securely
+- Use appropriate permission levels for each script
+- Review scripts before execution in production environments
+
+## 📄 License
+
+This repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📞 Support
+
+For support, please open an issue in the repository.
+
+---
+
+Made with ❤️ by the PowerShell Automation Team
