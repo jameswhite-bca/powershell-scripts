@@ -18,6 +18,9 @@ A comprehensive collection of PowerShell scripts organized by functionality and 
 - **Remove-AgentQueue.ps1** - Removes agent pool queues from Azure DevOps projects.
 - **AddOrUpdate-AzDoUser.ps1** - Adds or updates users in Azure DevOps with specified licenses.
 
+### ☁️ Azure
+- **Migrate-AzKeyVaultSecrets.ps1** - Migrates secrets from one Azure Key Vault to another.
+
 ### 💾 Backup/Asigra
 - Contains scripts for managing Asigra backup solutions.
 
@@ -73,6 +76,9 @@ Each script is designed for specific automation tasks. Detailed usage instructio
 ### 📋 Example Usage
 
 ```powershell
+# Azure Key Vault Migration
+.\Azure\Migrate-AzKeyVaultSecrets.ps1 -SourceVaultName "source-kv" -TargetVaultName "target-kv" -AzureSubscriptionId "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
 # Azure DevOps User Management
 .\AzureDevOps\AddOrUpdate-AzDoUser.ps1 -Organization "your-org" -UserEmail "user@example.com" -AccessLevel "basic" -PAT "your-pat"
 
