@@ -44,18 +44,25 @@ Write-Host "Setting Azure subscription to $AzureSubscriptionId..." -ForegroundCo
 Set-AzContext -SubscriptionId $AzureSubscriptionId
 
 # List and retrieve secrets from the source Key Vault
-Write-Host "Retrieving secrets from source Key Vault: $SourceVaultName..." -ForegroundColor Cyan
-$secrets = Get-AzKeyVaultSecret -VaultName $SourceVaultName
+try {
+    Write-Host "Retrieving secrets from source Key Vault: $SourceVaultName..." -ForegroundColor Cyan
+    $secrets = Get-AzKeyVaultSecret -VaultName $SourceVaultName -ErrorAction Stop
 
-# Migrate secrets to the target Key Vault
-foreach ($secret in $secrets) {
-    Write-Host "Migrating secret: $($secret.Name)..." -ForegroundColor Yellow
+    # Migrate secrets to the target Key Vault
+    foreach ($secret in $secrets) {
+        Write-Host "Migrating secret: $($secret.Name)..." -ForegroundColor Yellow
 
-    # Retrieve the secret value as a SecureString
-    $secretValue = (Get-AzKeyVaultSecret -VaultName $SourceVaultName -Name $secret.Name).SecretValue
+        # Retrieve the secret value as a SecureString
+        $secretValue = (Get-AzKeyVaultSecret -VaultName $SourceVaultName -Name $secret.Name -ErrorAction Stop).SecretValue
 
-    # Set the secret in the target Key Vault
-    Set-AzKeyVaultSecret -VaultName $TargetVaultName -Name $secret.Name -SecretValue $secretValue
+        # Set the secret in the target Key Vault
+        Set-AzKeyVaultSecret -VaultName $TargetVaultName -Name $secret.Name -SecretValue $secretValue -ErrorAction Stop
+    }
+
+    # Success message
+    Write-Host "✅ Secrets migrated successfully from $SourceVaultName to $TargetVaultName." -ForegroundColor Green
+} catch {
+    # Failure message
+    Write-Host "❌ Failed to migrate secrets from $SourceVaultName to $TargetVaultName. Error: $($_.Exception.Message)" -ForegroundColor Red
+    exit 1
 }
-
-Write-Host "Secrets migrated successfully from $SourceVaultName to $TargetVaultName." -ForegroundColor Green
