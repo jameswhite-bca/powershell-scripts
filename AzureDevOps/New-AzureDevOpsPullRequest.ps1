@@ -1,9 +1,9 @@
 param (
-    [Parameter(Mandatory = $true)][string]$org,             # e.g. "bcagroup"
+    [Parameter(Mandatory = $true)][string]$org,             # e.g. "myorg"
     [Parameter(Mandatory = $true)][string]$pat,             # Personal Access Token
     [Parameter(Mandatory = $true)][string]$project,         # Azure DevOps project name
     [Parameter(Mandatory = $true)][string]$repository,      # Repository name
-    [Parameter(Mandatory = $true)][string]$sourceBranch,    # e.g. "refs/heads/repo_template"
+    [Parameter(Mandatory = $true)][string]$sourceBranch,    # e.g. "refs/heads/develop"
     [Parameter(Mandatory = $true)][string]$targetBranch,    # e.g. "refs/heads/main"
     [Parameter(Mandatory = $true)][string]$reviewerId       # GUID of the reviewer
 )
